@@ -1,37 +1,39 @@
+/*
+add basic jquery
+*/
+
 var quiz = {
 	currentIndex: 0,
 	userAnswers: [],
 	
 	displayQuestion: function(index) {
 		//question
-		var questionDiv = document.getElementById("question");
-		questionDiv.innerHTML = ""; //erase contents
-		var questionh1 = document.createElement("h1");
-		questionDiv.appendChild(questionh1);
-		questionh1.innerHTML = allQuestions[index].question;
-		questionh1.setAttribute("id", "questionh1");
+		var questionDiv = $("#question").text(""); //erase contents
+		var questionh1 = $("<h1/>").attr({
+			id: "questionh1"
+			}).text(allQuestions[index].question);
+		questionDiv.append(questionh1);
 		
 		//answers
-		var answersDiv = document.getElementById("answers");
-		answersDiv.innerHTML = ""; //erase contents
-		for (var i=0; i<allQuestions[index].choices.length; i++) {
+		var answersDiv = $("#answers").text("");
+		for (var i = 0; i < allQuestions[index].choices.length; i++) {
 			
-			var p = document.createElement("p");
-			answersDiv.appendChild(p);
+			var p = $("<p/>");
+			answersDiv.append(p);
 			
-			var input = document.createElement("input");
-			input.setAttribute("type", "radio");
-			input.setAttribute("name", "answers");
-			var inputID = "answer" + i;
-			var inputValue = i;
-			input.setAttribute("id", inputID);
-			input.setAttribute("value", inputValue);
-			p.appendChild(input);
+			var input = $("<input/>").attr({
+				type: "radio",
+				name: "answers",
+				id: "answer" + i,
+				value: i,
+			});
+			p.append(input);
 			
-			var label = document.createElement("label");
-			label.setAttribute("for", inputID);
-			label.innerHTML = allQuestions[index].choices[i];
-			p.appendChild(label);
+			var label = $("<label/>").attr({
+				"for": "answer" + i
+			}).text(allQuestions[index].choices[i]);
+			
+			p.append(label);
 		}
 	},
 	
@@ -40,32 +42,33 @@ var quiz = {
 		var totalAnswers = quiz.userAnswers.length
 		
 		//get all the answers and check them
-		for (var i=0; i < totalAnswers; i++) {
+		for (var i = 0; i < totalAnswers; i++) {
 			if (quiz.userAnswers[i] == allQuestions[i].correctAnswer) {
 				correctAnswers++;
 			}
 		}
 		//remove everything and display result
-		var wrapper = document.getElementById("wrapper");
-		wrapper.innerHTML = "";
-		var h1 = document.createElement("h1");
-		wrapper.appendChild(h1);
-		h1.innerHTML = "You got " + correctAnswers + " out of " + totalAnswers + " questions correct.";
+		var wrapper = $("#wrapper").text("");
+		var h1 = $("<h1/>").text("You got " + correctAnswers + " out of " + totalAnswers + " questions correct.");
+		wrapper.append(h1);
 		
-		var p = document.createElement("p");
-		wrapper.appendChild(p);
+		var p = $("<p/>");
+		wrapper.append(p);
+		
 		
 		if (correctAnswers <= (totalAnswers/2)) {
-			p.innerHTML = "That's pretty bad. <br>"
-			var img = document.createElement("img");
-			p.appendChild(img);
-			img.setAttribute("src", "images/timlose.jpg");
+			p.text("That's pretty bad.");
+			var img = $("<img/>").attr({
+				src: "images/timlose.jpg"
+			});
+			wrapper.append(img);
 			
 		} else {
-			p.innerHTML = "That's pretty good. <br>"
-			var img = document.createElement("img");
-			p.appendChild(img);
-			img.setAttribute("src", "images/timwin.gif");
+			p.text("That's pretty good.");
+			var img = $("<img/>").attr({
+				src: "images/timwin.gif"
+			});
+			wrapper.append(img);	
 		}
 		
 	}
@@ -98,12 +101,10 @@ var allQuestions = [
 
 
 window.onload = function() {
-	quiz.displayQuestion(0);
-	var nextButton = document.getElementById("nextButton");
-	nextButton.onclick = function() {
-		//get answer
-		quiz.userAnswers[quiz.currentIndex] = document.querySelector('input[name="answers"]:checked').value;
-		
+	quiz.displayQuestion(quiz.currentIndex);
+	$("#nextButton").on("click", function() {
+		//store answer
+		quiz.userAnswers[quiz.currentIndex] = $('input[name="answers"]:checked').val();
 		//display next question
 		if (quiz.currentIndex < allQuestions.length - 1) {
 			quiz.currentIndex++;
@@ -111,6 +112,6 @@ window.onload = function() {
 		} else {
 			quiz.displayFinish();
 		}
-	};
+	});
 }
  
