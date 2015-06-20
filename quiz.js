@@ -59,13 +59,13 @@ var quiz = {
 			p.innerHTML = "That's pretty bad. <br>"
 			var img = document.createElement("img");
 			p.appendChild(img);
-			img.setAttribute("src", "timlose.jpg");
+			img.setAttribute("src", "images/timlose.jpg");
 			
 		} else {
 			p.innerHTML = "That's pretty good. <br>"
 			var img = document.createElement("img");
 			p.appendChild(img);
-			img.setAttribute("src", "timwin.gif");
+			img.setAttribute("src", "images/timwin.gif");
 		}
 		
 	}
