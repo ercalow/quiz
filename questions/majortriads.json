@@ -1,0 +1,37 @@
+/*
+Major Triads Spelling Practice
+*/
+majortriads = 
+[
+	{
+		question: 
+			"C Major", 
+		choices: [
+			"C E# G", 
+			"C E G#", 
+			"C E G", 
+			],
+		correctAnswer: 2
+	},
+	{
+		question: 
+			"Db Major", 
+		choices: [
+			"Db F A", 
+			"Db F Ab", 
+			"Db E G#", 
+			],
+		correctAnswer: 1
+	},
+	{
+		question: 
+			"D Major", 
+		choices: [
+			"D F A", 
+			"D F# A", 
+			"D F# E"
+			],
+		correctAnswer: 1
+	},
+
+]

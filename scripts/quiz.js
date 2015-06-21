@@ -7,12 +7,12 @@ var quiz = {
 		var questionDiv = $("#question").text(""); //erase contents
 		var questionh1 = $("<h1/>").attr({
 			id: "questionh1"
-			}).text(allQuestions[index].question);
+			}).text(timanderic[index].question);
 		questionDiv.append(questionh1);
 		
 		//answers
 		var answersDiv = $("#answers").text("");
-		for (var i = 0; i < allQuestions[index].choices.length; i++) {
+		for (var i = 0; i < timanderic[index].choices.length; i++) {
 			
 			var p = $("<p/>");
 			answersDiv.append(p);
@@ -27,7 +27,7 @@ var quiz = {
 			
 			var label = $("<label/>").attr({
 				"for": "answer" + i
-			}).text(allQuestions[index].choices[i]);
+			}).text(timanderic[index].choices[i]);
 			
 			p.append(label);
 		}
@@ -39,7 +39,7 @@ var quiz = {
 		
 		//get all the answers and check them
 		for (var i = 0; i < totalAnswers; i++) {
-			if (quiz.userAnswers[i] == allQuestions[i].correctAnswer) {
+			if (quiz.userAnswers[i] == timanderic[i].correctAnswer) {
 				correctAnswers++;
 			}
 		}
@@ -51,14 +51,15 @@ var quiz = {
 		var p = $("<p/>");
 		wrapper.append(p);
 		
-		
+		//if you get 50% or less
 		if (correctAnswers <= (totalAnswers/2)) {
 			p.text("That's pretty bad.");
 			var img = $("<img/>").attr({
 				src: "images/timlose.jpg"
 			});
 			wrapper.append(img);
-			
+		
+		//if you get over 50%
 		} else {
 			p.text("That's pretty good.");
 			var img = $("<img/>").attr({
@@ -71,54 +72,6 @@ var quiz = {
 	
 }
 
-var allQuestions = [
-	{
-		question: 
-			"I'm gonna grill up some ______", 
-		choices: [
-			"birds.", 
-			"salmon.", 
-			"steak.", 
-			"brats."
-			],
-		correctAnswer: 3
-	},
-	{
-		question: 
-			"What would make you a big hit with the dudes?",
-		choices: [
-			"Some sour cream and onion.", 
-			"Some key lime pie a la mode.", 
-			"A vegetable medley a crudites.", 
-			"Any kind of dessert."
-			],
-		correctAnswer: 1
-	},
-	{
-		question: 
-			"Why don't you come by if you've got some _____-fried pizza dough.",
-		choices: [
-			"single", 
-			"double", 
-			"triple", 
-			"quadruple", 
-			"quintuple"
-			],
-		correctAnswer: 2
-	},
-	{
-		question: 
-			"You know what I love are those...",
-		choices: [
-			"...hot mozzarella sticks.", 
-			"...<em>ridged chips</em>.", 
-			"...frozen meatballs"
-			],
-		correctAnswer: 0
-	}
-];
-
-
 
 window.onload = function() {
 	quiz.displayQuestion(quiz.currentIndex);
@@ -126,7 +79,7 @@ window.onload = function() {
 		//store answer
 		quiz.userAnswers[quiz.currentIndex] = $('input[name="answers"]:checked').val();
 		//display next question
-		if (quiz.currentIndex < allQuestions.length - 1) {
+		if (quiz.currentIndex < timanderic.length - 1) {
 			quiz.currentIndex++;
 			quiz.displayQuestion(quiz.currentIndex);
 		} else {
