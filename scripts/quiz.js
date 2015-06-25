@@ -1,13 +1,9 @@
 /*
 TO DO
 	choose which quiz you want
-	restart button
-		wipe all quiz properties
-	do different animations. can i randomize?
 		
 	test on IE9
 		
-	get rid of radio buttons
 	center
 	make it look good 
 	rwd 
@@ -74,19 +70,25 @@ var quiz = {
 		
 		//event listener for next button
 		$("#nextButton").on("click", function() {
-			//store answer
-			quiz.userAnswers[quiz.currentIndex] = $('input[name="answers"]:checked').val();
-			//slide up and erase
-			$("#wrapper").fadeOut("fast", function() {
-					wrapper.html("");
-					if (quiz.currentIndex < timanderic.length - 1) {
-						quiz.currentIndex++;
-						quiz.displayQuestion(quiz.currentIndex);
-					} else {
-						quiz.displayFinish();
-					}
-				});
-		});
+			//get answer
+			var choice = $('input[name="answers"]:checked').val();
+			if (choice === undefined) {
+				alert("no answer!");
+			} else {
+				//store answer
+				quiz.userAnswers[quiz.currentIndex] = choice;
+				//slide up and erase
+				$("#wrapper").fadeOut("fast", function() {
+						$("#wrapper").html("");
+						if (quiz.currentIndex < timanderic.length - 1) {
+							quiz.currentIndex++;
+							quiz.displayQuestion(quiz.currentIndex);
+						} else {
+							quiz.displayFinish();
+						};
+					});
+			}
+			});
 		
 		//display all
 		wrapper.fadeIn("fast");
@@ -114,7 +116,7 @@ var quiz = {
 		
 		//if you get 50% or less
 		if (correctAnswers <= (totalAnswers/2)) {
-			p.html("That's pretty bad.");
+			p.html("Ya blew it.");
 			var img = $("<img/>").attr({
 				src: "images/timlose.jpg"
 			});
