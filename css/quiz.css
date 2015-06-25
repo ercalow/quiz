@@ -8,3 +8,11 @@
 	margin-right: auto;
 	margin-left: auto;
 }
+
+/* gif width is 500 px */
+
+@media screen and (max-width:500px) {
+	img {
+		max-width: 100%;
+	}
+}
