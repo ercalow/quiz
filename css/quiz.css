@@ -2,7 +2,7 @@
 	display: none;
 }
 
-#startButton {
+#startButton, #restartButton {
 	width: 100px;
 	display: block;
 	margin-right: auto;
